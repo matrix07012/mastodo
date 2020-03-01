@@ -4,9 +4,9 @@ class TrendingTags
   KEY                  = 'trending_tags'
   EXPIRE_HISTORY_AFTER = 7.days.seconds
   EXPIRE_TRENDS_AFTER  = 1.day.seconds
-  THRESHOLD            = 5
+  THRESHOLD            = 3
   LIMIT                = 10
-  REVIEW_THRESHOLD     = 3
+  REVIEW_THRESHOLD     = 1
   MAX_SCORE_COOLDOWN   = 2.days.freeze
   MAX_SCORE_HALFLIFE   = 2.hours.freeze
 
