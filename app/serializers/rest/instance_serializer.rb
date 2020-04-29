@@ -67,6 +67,10 @@ class REST::InstanceSerializer < ActiveModel::Serializer
     Setting.registrations_mode == 'approved'
   end
 
+  def invites_enabled
+    Setting.min_invite_role == 'user'
+  end
+
   private
 
   def instance_presenter
