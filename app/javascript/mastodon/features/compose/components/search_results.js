@@ -76,7 +76,7 @@ class SearchResults extends ImmutablePureComponent {
 
           {results.get('accounts').map(accountId => <AccountContainer key={accountId} id={accountId} />)}
 
-          {results.get('accounts').size >= 5 && <LoadMore visible onClick={this.handleLoadMoreAccounts} />}
+          {results.get('accounts').size >= 20 && <LoadMore visible onClick={this.handleLoadMoreAccounts} />}
         </div>
       );
     }
@@ -89,7 +89,7 @@ class SearchResults extends ImmutablePureComponent {
 
           {results.get('statuses').map(statusId => <StatusContainer key={statusId} id={statusId} />)}
 
-          {results.get('statuses').size >= 5 && <LoadMore visible onClick={this.handleLoadMoreStatuses} />}
+          {results.get('statuses').size >= 20 && <LoadMore visible onClick={this.handleLoadMoreStatuses} />}
         </div>
       );
     } else if(results.get('statuses') && results.get('statuses').size === 0 && !searchEnabled && !(searchTerm.startsWith('@') || searchTerm.startsWith('#') || searchTerm.includes(' '))) {
@@ -112,7 +112,7 @@ class SearchResults extends ImmutablePureComponent {
 
           {results.get('hashtags').map(hashtag => <Hashtag key={hashtag.get('name')} hashtag={hashtag} />)}
 
-          {results.get('hashtags').size >= 5 && <LoadMore visible onClick={this.handleLoadMoreHashtags} />}
+          {results.get('hashtags').size >= 20 && <LoadMore visible onClick={this.handleLoadMoreHashtags} />}
         </div>
       );
     }
