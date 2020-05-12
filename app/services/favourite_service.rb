@@ -16,6 +16,10 @@ class FavouriteService < BaseService
     return favourite unless favourite.nil?
 
     favourite = Favourite.create!(account: account, status: status)
+    
+    ActivityPub::DeliveryWorker.push_bulk(account.followers.inboxes) do |inbox_url|
+      [build_json(favourite), favourite.account_id, inbox_url]
+    end
 
     create_notification(favourite)
     bump_potential_friendship(account, status)
