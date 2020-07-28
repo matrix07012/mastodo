@@ -24,7 +24,6 @@ The goal is to have a fork with on/off switches for features that are not availa
 - Oauth patch to allow authentication by either the local username or the email ( necessary for the XMPP integration ).
 - Trending tags that got removed from upstream is available
 - Moderation tools for trending tags has been added.
-- Rich text formatting from Thib@social.sitedethib.com ( allow displaying posts as they were written from other fediverse softs rather than stripping everything )
 - Quite a few other tweaks I can't recall...
 
 ## Policy on this fork:
