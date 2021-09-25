@@ -12,7 +12,12 @@ class ReportService < BaseService
 
     @comment.strip!
     create_report! unless @comment == ''
-    notify_staff! unless @comment == ''
+    notify_staff! unless @comment == ''    
+
+    raise ActiveRecord::RecordNotFound if @target_account.suspended?
+
+    create_report!
+    notify_staff!
     forward_to_origin! if !@target_account.local? && ActiveModel::Type::Boolean.new.cast(@options[:forward])
 
     @report
@@ -25,7 +30,8 @@ class ReportService < BaseService
       target_account: @target_account,
       status_ids: @status_ids,
       comment: @comment,
-      uri: @options[:uri]
+      uri: @options[:uri],
+      forwarded: ActiveModel::Type::Boolean.new.cast(@options[:forward])
     )
   end
 
