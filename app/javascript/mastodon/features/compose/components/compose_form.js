@@ -196,7 +196,7 @@ class ComposeForm extends ImmutablePureComponent {
   }
 
   render () {
-    const { intl, onPaste, showSearch } = this.props;
+    const { intl, onPaste, showSearch, anyMedia } = this.props;
     const disabled = this.props.isSubmitting;
     const text     = [this.props.spoilerText, countableText(this.props.text)].join('');
     const disabledButton = disabled || this.props.isUploading || this.props.isChangingUpload || length(text) > maxChars || (text.length !== 0 && text.trim().length === 0 && !anyMedia);
