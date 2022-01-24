@@ -274,7 +274,7 @@ class Status < ApplicationRecord
        pattern = sanitize_sql_like(term)
        pattern = "#{pattern}"
        Status.unscoped {
-	       Status.where("updated_at > ?", 2.months.ago).where('tsv @@ plainto_tsquery(?)', pattern).where(visibility: [:public, :unlisted]).order(updated_at: :desc).limit(limit).offset(offset)
+	       Status.where('tsv @@ plainto_tsquery(?)', pattern).where(visibility: [:public, :unlisted]).order(updated_at: :desc).limit(limit).offset(offset)
        }
     end
 

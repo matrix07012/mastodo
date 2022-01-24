@@ -1,3 +1,5 @@
+Patch no longer works but it should give you a clear idea what needs to be changed
+
 diff --git a/app/javascript/mastodon/actions/search.js b/app/javascript/mastodon/actions/search.js
 index 7c06670eb..ee7bc1657 100644
 --- a/app/javascript/mastodon/actions/search.js
@@ -19,11 +21,11 @@ index fb9bbc9a9..f7718a14f 100644
    after_create :set_poll_id
  
    class << self
-+    def search_for(term, limit = 20)
++    def search_for(term, limit = 20, offset)
 +      pattern = sanitize_sql_like(term)
 +      pattern = "#{pattern}"
 +      Status.unscoped {
-+        Status.where('tsv @@ plainto_tsquery(?)', pattern).where(visibility: [:public]).order(updated_at: :desc).limit(limit)
++        Status.where('tsv @@ plainto_tsquery(?)', pattern).where(visibility: [:public]).order(updated_at: :desc).limit(limit).offset(offset)
 +      }
 +    end
      def selectable_visibilities
@@ -37,7 +39,7 @@ index e0da61dac..f3aaae9e1 100644
          results[:accounts] = perform_accounts_search! if account_searchable?
          results[:statuses] = perform_statuses_search! if full_text_searchable?
          results[:hashtags] = perform_hashtags_search! if hashtag_searchable?
-+       results[:statuses] = Status.search_for(query.gsub(/\A#/, ''), limit) unless query.start_with?('@') or query.start_with?('#')
++       results[:statuses] = Status.search_for(query.gsub(/\A#/, ''), limit, offset) unless query.start_with?('@') or query.start_with?('#')
        end
      end
    end
