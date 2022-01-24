@@ -20,7 +20,7 @@ class SearchService < BaseService
 	if full_text_searchable?
           results[:statuses] = perform_statuses_search!
 	else
-          results[:statuses] = Status.search_for(query.gsub(/\A#/, ''), limit, offset) unless query.start_with?('@') or query.start_with?('#')
+          results[:statuses] = Status.search_for(query.gsub(/\A#/, ''), limit, @offset) unless query.start_with?('@') or query.start_with?('#')
 	end
       end
     end
