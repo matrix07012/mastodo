@@ -89,7 +89,7 @@ class Option extends React.PureComponent {
 
           <AutosuggestInput
             placeholder={intl.formatMessage(messages.option_placeholder, { number: index + 1 })}
-            maxLength={50}
+            maxLength={80}
             value={title}
             onChange={this.handleOptionTitleChange}
             suggestions={this.props.suggestions}
@@ -157,7 +157,7 @@ class PollForm extends ImmutablePureComponent {
         </ul>
 
         <div className='poll__footer'>
-          <button disabled={options.size >= 4} className='button button-secondary' onClick={this.handleAddOption}><Icon id='plus' /> <FormattedMessage {...messages.add_option} /></button>
+          <button disabled={options.size >= 20} className='button button-secondary' onClick={this.handleAddOption}><Icon id='plus' /> <FormattedMessage {...messages.add_option} /></button>
 
           {/* eslint-disable-next-line jsx-a11y/no-onchange */}
           <select value={expiresIn} onChange={this.handleSelectDuration}>
@@ -165,9 +165,13 @@ class PollForm extends ImmutablePureComponent {
             <option value={1800}>{intl.formatMessage(messages.minutes, { number: 30 })}</option>
             <option value={3600}>{intl.formatMessage(messages.hours, { number: 1 })}</option>
             <option value={21600}>{intl.formatMessage(messages.hours, { number: 6 })}</option>
+            <option value={43200}>{intl.formatMessage(messages.hours, { number: 12 })}</option>
             <option value={86400}>{intl.formatMessage(messages.days, { number: 1 })}</option>
             <option value={259200}>{intl.formatMessage(messages.days, { number: 3 })}</option>
             <option value={604800}>{intl.formatMessage(messages.days, { number: 7 })}</option>
+            <option value={1209600}>{intl.formatMessage(messages.days, { number: 14 })}</option>
+            <option value={2592000}>{intl.formatMessage(messages.months, { number: 1 })}</option>
+            <option value={7776000}>{intl.formatMessage(messages.months, { number: 3 })}</option>
           </select>
         </div>
       </div>
