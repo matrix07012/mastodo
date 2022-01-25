@@ -9,19 +9,16 @@ We tend to integrate all the upstream commits, but allow more features to be ava
 The goal is to have a fork with on/off switches for features that are not available upstream, allowing the admin a lot of customization to suit better their community.
 
 ## Patches implemented:
-- Full Text search for statuses ( upstream code only allow searching users and hashtags, or needs Elastic Search to allow searching your own statuses only ).
-- FTS for your home timeline ( not only your own toots, but also people you follow, WIP ).
-- 20 results instead of 5 per type of search (pagination not working)
+- Full Text search for statuses ( upstream code only allow searching users and hashtags, or needs Elastic Search to allow searching your own statuses only )
+- 20 results instead of 5 per type of search
 - The FAQ link on the homepage points to /about/more instead of the github repo.
 - Configurable character limit for posts with `MAX_TOOT_CHARS` in `.env.production` (default is 2048) by <a href="https://github.com/lambadalambda">@lambadalambda</a>.
 - Configurable character limit instead of 160 for profile bio with `MAX_BIO_CHARS` in `.env.production` (default is 512).
 - Configurable display name limit with `MAX_DISPLAY_NAME_CHARS` in `.env.production`.
 - Configurable number of profile fields with `MAX_PROFILE_FIELDS` in `.env.production`.
 - Configurable media upload limit with with `MAX_IMG_SIZE` and `MAX_VID_SIZE` in `.env.production`.
-- replies and reboosts are displayed in the timelines instead of being ignored.
-- CI to check every user facing function is behaving correctly.
+- replies and reboosts are displayed in the timelines instead of being ignored (broken?)
 - A few other minor tweaks like full column display to fill bigger screen, multiples themes, and other improvements...
-- Oauth patch to allow authentication by either the local username or the email ( necessary for the XMPP integration ).
 - Trending tags that got removed from upstream is available
 - Moderation tools for trending tags has been added.
 - Quite a few other tweaks I can't recall...
