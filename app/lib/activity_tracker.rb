@@ -52,6 +52,8 @@ class ActivityTracker
   end
 
   class << self
+    include Redisable
+    
     def increment(prefix)
       new(prefix, :basic).add
     end
