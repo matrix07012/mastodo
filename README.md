@@ -19,8 +19,9 @@ The goal is to have a fork with on/off switches for features that are not availa
 - Configurable media upload limit with with `MAX_IMG_SIZE` and `MAX_VID_SIZE` in `.env.production`.
 - replies and reboosts are displayed in the timelines instead of being ignored (broken?)
 - A few other minor tweaks like full column display to fill bigger screen, multiples themes, and other improvements...
-- Trending tags that got removed from upstream is available
-- Moderation tools for trending tags has been added.
+- Tags and statuses hardcoded as approved by default
+- Trending tags that got removed from upstream is available (deprecated)
+- Moderation tools for trending tags has been added. (deprecated)
 - Quite a few other tweaks I can't recall...
 
 ## Policy on this fork:

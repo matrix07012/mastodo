@@ -81,11 +81,11 @@ class Account < ApplicationRecord
   enum suspension_origin: [:local, :remote], _prefix: true
 
   validates :username, presence: true
-  
+
   MAX_DISPLAY_NAME_LENGTH = (ENV['MAX_DISPLAY_NAME_CHARS'] || 30).to_i
   MAX_NOTE_LENGTH = (ENV['MAX_BIO_CHARS'] || 512).to_i
   MAX_FIELDS = (ENV['MAX_PROFILE_FIELDS'] || 4).to_i
-  
+
   validates_with UniqueUsernameValidator, if: -> { will_save_change_to_username? }
 
   # Remote user validations
@@ -266,6 +266,10 @@ class Account < ApplicationRecord
 
   def memorialize!
     update!(memorial: true)
+  end
+
+  def trendable
+    boolean_with_default('trendable', true)
   end
 
   def sign?
