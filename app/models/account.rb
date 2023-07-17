@@ -272,6 +272,8 @@ class Account < ApplicationRecord
     boolean_with_default('trendable', true)
   end
 
+  alias trendable? trendable
+
   def sign?
     true
   end
