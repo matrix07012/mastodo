@@ -283,7 +283,7 @@ class Status < ApplicationRecord
     if attributes['trendable'].nil?
       account.trendable?
     else
-      true
+      attributes['trendable']
     end
   end
 
