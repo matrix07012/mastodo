@@ -16,6 +16,8 @@ module Mastodon
     option :concurrency, type: :numeric, default: 5, aliases: [:c]
     option :verbose, type: :boolean, aliases: [:v]
     option :dry_run, type: :boolean
+    option :limited_federation_mode, type: :boolean
+    option :by_uri, type: :boolean
     option :whitelist_mode, type: :boolean
     desc 'purge [DOMAIN...]', 'Remove accounts from a DOMAIN without a trace'
     long_desc <<-LONG_DESC
@@ -26,6 +28,12 @@ module Mastodon
       When the --whitelist-mode option is given, instead of purging accounts
       from a single domain, all accounts from domains that are not whitelisted
       are removed from the database.
+
+      When the --by-uri option is given, DOMAIN is used to match the domain part of actor
+      URIs rather than the domain part of the webfinger handle. For instance, an account
+      that has the handle `foo@bar.com` but whose profile is at the URL
+      `https://mastodon-bar.com/users/foo`, would be purged by either
+      `tootctl domains purge bar.com` or `tootctl domains purge --by-uri mastodon-bar.com`.
     LONG_DESC
     def purge(*domains)
       dry_run = options[:dry_run] ? ' (DRY RUN)' : ''
@@ -34,7 +42,11 @@ module Mastodon
         if options[:whitelist_mode]
           Account.remote.where.not(domain: DomainAllow.pluck(:domain))
         elsif !domains.empty?
-          Account.remote.where(domain: domains)
+          if options[:by_uri]
+            domains.map { |domain| Account.remote.where(Account.arel_table[:uri].matches("https://#{domain}/%", false, true)) }.reduce(:or)
+          else
+            Account.remote.where(domain: domains)
+          end
         else
           say('No domain(s) given', :red)
           exit(1)
