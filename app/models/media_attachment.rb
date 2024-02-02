@@ -157,7 +157,7 @@ class MediaAttachment < ApplicationRecord
   }.freeze
 
   GLOBAL_CONVERT_OPTIONS = {
-    all: '-quality 90 -strip +set modify-date +set create-date',
+    all: '-quality 90 -strip +set date:modify +set date:create +set date:timestamp',
   }.freeze
 
   belongs_to :account,          inverse_of: :media_attachments, optional: true
